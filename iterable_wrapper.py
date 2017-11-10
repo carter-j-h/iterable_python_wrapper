@@ -586,8 +586,21 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	"""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-	
+	Iterable Email Requests
 
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def send_email(self, campaign_id=None, recipient_email=None,
+					data_fields=None, send_at=None,
+					allow_repeat_marketing_sends=None, metadata=None,
+					message_medium=None, icon_class=None, name=None
+					):
+
+		call="/api/email/target"
+
+		payload ={}
+
+		`
 
