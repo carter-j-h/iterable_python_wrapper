@@ -602,5 +602,51 @@ class IterableAPI():
 
 		payload ={}
 
-		`
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]= str(recipient_email)
+
+		if data_fields is not None:
+			payload["dataFields"]= data_fields
+
+		if send_at is not None:
+			payload["sendAt"]= send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if metadata is not None:
+			payload["metadata"]= metadata
+
+		if message_medium is not None:
+			payload["messageMedium"]= message_medium
+
+		if icon_class is not None:
+			payload["iconClass"]= icon_class
+
+		if name is not None:
+			payload["name"]= name
+
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def view_email_in_browser(self, email=None, message_id=None):
+
+		call = "/api/email/viewInBrowser"
+
+		payload ={}
+
+		if email is not None:
+			payload["email"]= email
+
+		if message_id is not None:
+			payload["messageId"]= message_id
+
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+
 
