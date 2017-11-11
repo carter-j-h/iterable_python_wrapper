@@ -649,4 +649,47 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET", params=payload)
 
 
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	
+	Export Data Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+	def export_data_csv(self, data_type_name=None, date_range=None, delimiter=None):
+
+		call="/api/export/data.csv"
+
+		payload={}
+
+		if data_type_name is not None:
+			payload["dataTypeName"]= data_type_name
+
+		if date_range is not None:
+			payload["range"]= date_range
+
+		if delimiter is not None:
+			payload["delimiter"]= delimiter
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def export_data_json(self, data_type_name=None, date_range=None, delimiter=None):
+
+		call="/api/export/data.json"
+
+		payload={}
+
+		if data_type_name is not None:
+			payload["dataTypeName"]= data_type_name
+
+		if date_range is not None:
+			payload["range"]= date_range
+
+		if delimiter is not None:
+			payload["delimiter"]= delimiter
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+
+
 
