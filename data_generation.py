@@ -1,41 +1,46 @@
+import csv
+import json
+import requests
+import time
+
 from faker import Faker
+from iterable_wrapper import IterableAPI
 
-fake=Faker()
+# Iterable Instance Credentials 
+API_KEY = "94c3333a8e224b32b93a40788d1927cc"
 
 
-class DataGeneration(object):
+class DataGeneration(IterableAPI):
 	"""docstring for DataGeneration"""
 	def __init__(self, users=0, events=0):
 		
-
+		IterableAPI.__init__(self, api_key=API_KEY)
 		self.users = users
 		self.events = events
 
 
 	def generate_users(self):
-		container = []
+		# initiate Faker
+		fake=Faker()
 
 		for i in range(0,self.users):
 			i = fake.profile()
 
-			email = i["mail"]
+			email = str(i["mail"])
 
 			i.pop("mail")
+			i.pop("current_location")
 
-			person = {}
+		return self.update_user(email=email, data_fields=i, user_id=None, merge_nested_objects=None)
 
-			person["email"]= email
-			person["dataFields"]= i
-			
-			
-			container.append(person)
-
-		print(container, "\nYou have "+str(len(container)) + " users generated")
+	
 
 
-data = DataGeneration(users=10, events=0)
+data = DataGeneration(users=1, events=0)
 
-data.generate_users()
+print(data.generate_users())
+
+
 
 
 

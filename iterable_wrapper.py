@@ -691,5 +691,63 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET", params=payload)
 
 
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	
+	inApp Requests
 
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	
+	def get_in_app_messages(self, email=None, user_id=None, count=None,
+							platform=None, sdk_version=None):
+
+		call = "/api/inApp/getMessages"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]=str(email)
+
+		if user_id is not None:
+			payload["userId"]=str(user_id)
+
+		if count is not None:
+			payload["count"]=count
+
+		if platform is not None:
+			payload["platform"]=str(platform)
+
+		if sdk_version is not None:
+			payload["SDKVersion"]= sdk_version
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def send_in_app_notification(self, campaign_id=None, recipient_email=None,
+								data_fields=None, send_at=None, message_medium=None,
+								allow_repeat_marketing_sends=None):
+
+		call="/api/inApp/target"
+
+		payload={}
+
+		if campaign_id is not None:
+			payload["campaignId"]=campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]=recipient_email
+
+		if data_fields is not None:
+			payload["dataFields"]=data_fields
+
+		if send_at is not None:
+			payload["sendAt"]=send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if message_medium is not None:
+			payload["messageMedium"]=message_medium
+
+
+		return self.api_call(call=call, method="POST", json=payload)
 
