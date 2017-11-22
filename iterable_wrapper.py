@@ -68,11 +68,11 @@ class IterableAPI():
 		else:
 			print(r.status_code)
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Campaign Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def list_campaign_info(self):
 
@@ -150,12 +150,12 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET")
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Channel Requests
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def list_channels(self):
 
@@ -163,11 +163,11 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET")
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Commerce Reqeusts
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def track_purchase(self, user=None, items=None, campaign_id=None, 
 					   template_id=None, total=None, created_at=None,
@@ -214,11 +214,11 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Email Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def send_email(self, campaign_id=None, recipient_email=None,
 				   data_fields=None, send_at=None,
@@ -273,11 +273,11 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET", params=payload)
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 		Iterable Event Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def get_events(self, email=None, limit=None):
 
@@ -441,11 +441,11 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 		
 	Iterable Experiment Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def get_experiment_metrics(self, experiment_id=None, campaign_id=None,
 							   start_date_time=None, end_date_time=None):
@@ -469,11 +469,11 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET", params=payload)
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	
 	Export Data Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def export_data_csv(self, data_type_name=None, date_range=None,
 						delimiter=None):
@@ -512,11 +512,11 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET", params=payload)
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	
-	inApp Requests
+	Iterable inApp Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def get_in_app_messages(self, email=None, user_id=None, count=None,
 							platform=None, sdk_version=None):
@@ -571,12 +571,12 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 		
 		Iterable List requests
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def get_lists(self):
 
@@ -653,12 +653,12 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	
 	Iterable MessageType Requests
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def list_message_types(self):
 
@@ -666,12 +666,12 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET")
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Metadata Requests
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	
 	def list_available_tables(self):
 
@@ -724,14 +724,84 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="PUT", json=payload)
 
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+	Iterable Push Requests
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def send_push_notification(self, campaign_id=None, 
+							   recipient_email=None, data_fields=None,
+							   send_at=None, 
+							   allow_repeat_marketing_sends=None,
+							   message_medium=None):
+
+		call="/api/push/target"
+
+		payload={}
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]= recipient_email
+
+		if data_fields is not None:
+			payload["dataFields"]= data_fields
+
+		if send_at is not None:
+			payload["sendAt"]= send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if message_medium is not None:
+			payload["messageMedium"]= message_medium
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable SMS Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def send_sms_message(self, campaign_id=None, 
+					     recipient_email=None, data_fields=None,
+					     send_at=None, 
+					     allow_repeat_marketing_sends=None,
+					     message_medium=None):
+
+		call="/api/sms/target"
+
+		payload={}
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]= recipient_email
+
+		if data_fields is not None:
+			payload["dataFields"]= data_fields
+
+		if send_at is not None:
+			payload["sendAt"]= send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if message_medium is not None:
+			payload["messageMedium"]= message_medium
+
+		return self.api_call(call=call, method="POST", json=payload) 
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable User Requests
 
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def delete_user(self, email=None):
 	
@@ -1005,6 +1075,69 @@ class IterableAPI():
 
 		if template_id is not None:
 			payload["templateId"]= template_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Web Push Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def send_web_push_notification(self, campaign_id=None, 
+							       recipient_email=None, data_fields=None,
+							       send_at=None, 
+							       allow_repeat_marketing_sends=None,
+							       message_medium=None):
+
+		call="/api/webPush/target"
+
+		payload={}
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]= recipient_email
+
+		if data_fields is not None:
+			payload["dataFields"]= data_fields
+
+		if send_at is not None:
+			payload["sendAt"]= send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if message_medium is not None:
+			payload["messageMedium"]= message_medium
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Workflow Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def trigger_workflow(self, email=None, workflow_id=None,
+						 data_fields=None, list_id=None):
+
+		call="/api/workflows/triggerWorkflow"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]= email
+
+		if workflow_id is not None:
+			payload["workflowId"]= workflow_id
+
+		if data_fields is not None:
+			payload["dataFields"]=data_fields
+
+		if list_id is not None:
+			payload["listId"]= list_id
 
 		return self.api_call(call=call, method="POST", json=payload)
 
