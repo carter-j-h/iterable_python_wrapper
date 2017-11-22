@@ -12,19 +12,18 @@ class IterableAPI():
 	have found flexible in regards to the arguments you
 	can pass into each request.  Their documentation is 
 	also excellent.  This makes it must easier in the event I were to 
-	expand this wrapper to encompass all the possible Iterable API requests. 
+	expand this wrapper to encompass all the possible Iterable API requests.
 
 	"""	
 
 	def __init__(self, api_key):
 		"""This preforms all initialization and stores the unique API key of the
-			Iterable instance. It also stores the base URI, which is consistent for 
-			all instances.  
+			Iterable instance. It also stores the base URI, which is consistent
+			for all instances.  
 		"""
 		
 		self.base_uri = "https://api.iterable.com"		
 		self.api_key = api_key
-
 
 	def api_call(self, call, method, params=None, headers=None, data=None,
 				 json=None):
@@ -81,9 +80,9 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET")
 
 	def create_campaign(self, name=None, list_ids=None, template_id=None,
-						suppression_list_ids=None, send_at=None, send_mode=None,
-						start_time_zone=None, default_time_zone=None, 
-						data_fields=None):
+						suppression_list_ids=None, send_at=None,
+						send_mode=None, start_time_zone=None,
+						default_time_zone=None, data_fields=None):
 
 		call = "/api/capaigns/create"
 
@@ -119,9 +118,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def get_campaign_metrics(self, campaign_id=None, start_date_time=None,
-								end_date_time=None, use_new_format=None):
+							 end_date_time=None, use_new_format=None):
 
 		call= "/api/campaigns/metrics"
 
@@ -171,8 +169,8 @@ class IterableAPI():
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def track_purchase(self, user=None, items=None, campaign_id=None, 
-						template_id=None, total=None, created_at=None,
-						data_fields=None):
+					   template_id=None, total=None, created_at=None,
+					   data_fields=None):
 
 		call="/api/commerce/trackPurchase"
 
@@ -215,7 +213,6 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Email Requests
@@ -223,10 +220,9 @@ class IterableAPI():
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def send_email(self, campaign_id=None, recipient_email=None,
-					data_fields=None, send_at=None,
-					allow_repeat_marketing_sends=None, metadata=None,
-					message_medium=None, icon_class=None, name=None
-					):
+				   data_fields=None, send_at=None,
+				   allow_repeat_marketing_sends=None, metadata=None,
+				   message_medium=None, icon_class=None, name=None):
 
 		call="/api/email/target"
 
@@ -262,7 +258,6 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def view_email_in_browser(self, email=None, message_id=None):
 
 		call = "/api/email/viewInBrowser"
@@ -275,9 +270,7 @@ class IterableAPI():
 		if message_id is not None:
 			payload["messageId"]= message_id
 
-
 		return self.api_call(call=call, method="GET", params=payload)
-
 
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -297,9 +290,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET", parms=payload)
 
-
-	def consume_in_app_notification(self, email=None, user_id=None
-								, message_id=None, button_index=None):
+	def consume_in_app_notification(self, email=None, user_id=None,
+									message_id=None, button_index=None):
 
 		call = "/api/events/inAppConsume"
 
@@ -319,10 +311,9 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def track_event(self, email=None, event_name=None, created_at=None,
 					data_fields=None, user_id=None, campaign_id=None,
-						template_id=None):
+					template_id=None):
 
 		call="/api/events/track"
 
@@ -349,11 +340,10 @@ class IterableAPI():
 		if template_id is not None:
 			payload["templateId"]= template_id
 
-
 		return self.api_call(call=call, method="POST", json=payload)
 
-	def track_in_app_click(self, email=None, user_id=None, message_id=None,
-							button_index=None):
+	def track_in_app_click(self, email=None, user_id=None,
+						   message_id=None, button_index=None):
 
 		call="/api/events/trackInAppClick"
 
@@ -373,9 +363,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def track_in_app_open(self, email=None, user_id=None, message_id=None,
-							button_index=None):
+						  button_index=None):
 
 		call="/api/events/trackInAppOpen"
 
@@ -395,10 +384,9 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def track_push_open(self, email=None, user_id=None, campaign_id=None,
 						template_id=None, message_id=None, created_at=None,
-							data_fields=None):
+						data_fields=None):
 
 		call="/api/events/trackPushOpen"
 
@@ -427,9 +415,9 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
-	def track_web_push_click(self, email=None, user_id=None, message_id=None,
-								campaign_id=None, template_id=None):
+	def track_web_push_click(self, email=None, user_id=None,
+							 message_id=None, campaign_id=None,
+							 template_id=None):
 
 		call ="/api/events/trackWebPushClick" 
 
@@ -450,7 +438,6 @@ class IterableAPI():
 		if template_id is not None:
 			payload["templateId"]=template_id
 
-
 		return self.api_call(call=call, method="POST", json=payload)
 
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -460,7 +447,7 @@ class IterableAPI():
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	def get_experiment_metrics(self, experiment_id=None, campaign_id=None,
-								start_date_time=None, end_date_time=None):
+							   start_date_time=None, end_date_time=None):
 
 		call="/api/experiments/metrics"
 
@@ -478,7 +465,6 @@ class IterableAPI():
 		if end_date_time is not None:
 			payload["endDateTime"]=end_date_time
 
-
 		return self.api_call(call=call, method="GET", params=payload)
 
 
@@ -488,8 +474,8 @@ class IterableAPI():
 
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-	def export_data_csv(self, data_type_name=None, date_range=None, delimiter=None):
+	def export_data_csv(self, data_type_name=None, date_range=None,
+						delimiter=None):
 
 		call="/api/export/data.csv"
 
@@ -506,7 +492,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET", params=payload)
 
-	def export_data_json(self, data_type_name=None, date_range=None, delimiter=None):
+	def export_data_json(self, data_type_name=None, date_range=None,
+						 delimiter=None):
 
 		call="/api/export/data.json"
 
@@ -530,7 +517,6 @@ class IterableAPI():
 
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-	
 	def get_in_app_messages(self, email=None, user_id=None, count=None,
 							platform=None, sdk_version=None):
 
@@ -556,8 +542,8 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET", params=payload)
 
 	def send_in_app_notification(self, campaign_id=None, recipient_email=None,
-								data_fields=None, send_at=None, message_medium=None,
-								allow_repeat_marketing_sends=None):
+								 data_fields=None, send_at=None, message_medium=None,
+								 allow_repeat_marketing_sends=None):
 
 		call="/api/inApp/target"
 
@@ -581,9 +567,7 @@ class IterableAPI():
 		if message_medium is not None:
 			payload["messageMedium"]=message_medium
 
-
 		return self.api_call(call=call, method="POST", json=payload)
-
 
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 		
@@ -647,7 +631,7 @@ class IterableAPI():
 		return self.api_call(call=call, method="POST", json=payload)
 
 	def remove_subscribers_to_list(self, list_id=None, subscribers=None,
-									campaign_id=None, channel_unsubscribe=False):
+								   campaign_id=None, channel_unsubscribe=False):
 
 		call = "/api/lists/unsubscribe"
 
@@ -667,7 +651,6 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	
 	Iterable MessageType Requests
@@ -681,18 +664,38 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET")
 
-
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable Metadata Requests
 
 
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-		
 	
+	def list_available_tables(self):
 
+		call="/api/metadata"
 
-		
+		return self.api_call(call=call, method="GET")
+
+	def delete_all_metadata_from_table(self, table=None):
+
+		if table is not None:
+			call="/api/metadata"+str(table)
+
+		return self.api_call(call=call, method="DELETE")
+
+	def list_keys_in_table(self, table=None, next_marker=None):
+
+		if table is not None:
+			call= "/api/metadata/"+str(table)
+
+		payload ={}
+
+		if next_marker is not None:
+			payload["nextMarket"]=next_marker
+
+		return self.api_call(call=call, method="GET", params=payload)
+
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 	Iterable User Requests
@@ -713,7 +716,6 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="DELETE")
 
-
 	def get_user_by_email(self, email=None):
 		"""This function gets a user's data field and info"""
 
@@ -721,7 +723,6 @@ class IterableAPI():
 			call = "/api/users/"+ str(email)
 
 		return self.api_call(call=call, method="GET")
-
 
 	def bulk_update_user(self, users):
 
@@ -755,7 +756,6 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def get_users_by_userid(self, user_id=None):
 
 		call = "/api/users/byUserId"
@@ -766,7 +766,6 @@ class IterableAPI():
 			payload["userId"] = user_id
 
 		return self.api_call(call=call, method="GET", params=payload)
-
 
 	def delete_users_by_userid_userid(self, user_id=None):
 
@@ -822,9 +821,9 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET")
 
 	def get_sent_messages(self, email=None, user_id=None, limit=None,
-							campaign_id=None, start_date_time=None,
-							end_date_time=None, exclude_blast_campaigns=None,
-							message_medium=None):
+						  campaign_id=None, start_date_time=None,
+						  end_date_time=None, exclude_blast_campaigns=None,
+						  message_medium=None):
 		"""
 
 		campaign_id takes an Array[double] as a query parameter...what
@@ -898,9 +897,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-
 	def update_user(self, email=None, data_fields=None, user_id=None,
-					 merge_nested_objects=None):
+					merge_nested_objects=None):
 
 		"""
 		The Iterable 'User Update' api updates a user profile with new data 
@@ -919,8 +917,6 @@ class IterableAPI():
 
 		call = "/api/users/update"
 		
-		# construct payload per documentation here
-		# https://api.iterable.com/api/docs#!/users/updateUser
 		payload = {}
 
 		if email is not None:
@@ -952,9 +948,9 @@ class IterableAPI():
 		return self.api_call(call=call, method="POST", json=payload)
 
 	def update_subscriptions(self, email=None, email_list_ids=None,
-							unsubscribed_channel_ids=None,
-							unsubscribed_message_type_ids=None,
-							campaign_id=None, template_id=None):
+							 unsubscribed_channel_ids=None,
+							 unsubscribed_message_type_ids=None,
+							 campaign_id=None, template_id=None):
 
 		call="/api/users/updateSubscriptions"
 

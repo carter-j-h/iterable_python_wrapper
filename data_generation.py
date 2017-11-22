@@ -1,10 +1,10 @@
 import csv
-from faker import Faker
 import json
 import requests
 import time
 
-# import class from other file
+from faker import Faker
+
 from iterable_wrapper import IterableAPI
 
 # Iterable Instance Credentials 
