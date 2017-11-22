@@ -1,9 +1,10 @@
 import csv
+from faker import Faker
 import json
 import requests
 import time
 
-from faker import Faker
+# import class from other file
 from iterable_wrapper import IterableAPI
 
 # Iterable Instance Credentials 
@@ -32,6 +33,12 @@ class DataGeneration(IterableAPI):
 			i.pop("current_location")
 
 		return self.update_user(email=email, data_fields=i, user_id=None, merge_nested_objects=None)
+
+	def generate_events(self):
+
+		fake=Faker()
+
+		for i in range(0, self.events):
 
 	
 

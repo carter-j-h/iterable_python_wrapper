@@ -319,6 +319,7 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
+
 	def track_event(self, email=None, event_name=None, created_at=None,
 					data_fields=None, user_id=None, campaign_id=None,
 						template_id=None):
@@ -448,9 +449,248 @@ class IterableAPI():
 
 		if template_id is not None:
 			payload["templateId"]=template_id
-			
+
 
 		return self.api_call(call=call, method="POST", json=payload)
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+		
+	Iterable Experiment Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def get_experiment_metrics(self, experiment_id=None, campaign_id=None,
+								start_date_time=None, end_date_time=None):
+
+		call="/api/experiments/metrics"
+
+		payload={}
+
+		if experiment_id is not None:
+			payload["experimentId"]=experiment_id
+
+		if campaign_id is not None:
+			payload["campaignId"]=campaign_id
+
+		if start_date_time is not None:
+			payload["startDateTime"]=start_date_time
+
+		if end_date_time is not None:
+			payload["endDateTime"]=end_date_time
+
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	
+	Export Data Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+	def export_data_csv(self, data_type_name=None, date_range=None, delimiter=None):
+
+		call="/api/export/data.csv"
+
+		payload={}
+
+		if data_type_name is not None:
+			payload["dataTypeName"]= data_type_name
+
+		if date_range is not None:
+			payload["range"]= date_range
+
+		if delimiter is not None:
+			payload["delimiter"]= delimiter
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def export_data_json(self, data_type_name=None, date_range=None, delimiter=None):
+
+		call="/api/export/data.json"
+
+		payload={}
+
+		if data_type_name is not None:
+			payload["dataTypeName"]= data_type_name
+
+		if date_range is not None:
+			payload["range"]= date_range
+
+		if delimiter is not None:
+			payload["delimiter"]= delimiter
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	
+	inApp Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	
+	def get_in_app_messages(self, email=None, user_id=None, count=None,
+							platform=None, sdk_version=None):
+
+		call = "/api/inApp/getMessages"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]=str(email)
+
+		if user_id is not None:
+			payload["userId"]=str(user_id)
+
+		if count is not None:
+			payload["count"]=count
+
+		if platform is not None:
+			payload["platform"]=str(platform)
+
+		if sdk_version is not None:
+			payload["SDKVersion"]= sdk_version
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def send_in_app_notification(self, campaign_id=None, recipient_email=None,
+								data_fields=None, send_at=None, message_medium=None,
+								allow_repeat_marketing_sends=None):
+
+		call="/api/inApp/target"
+
+		payload={}
+
+		if campaign_id is not None:
+			payload["campaignId"]=campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]=recipient_email
+
+		if data_fields is not None:
+			payload["dataFields"]=data_fields
+
+		if send_at is not None:
+			payload["sendAt"]=send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if message_medium is not None:
+			payload["messageMedium"]=message_medium
+
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+		
+		Iterable List requests
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def get_lists(self):
+
+		call = "/api/lists"
+
+		return self.api_call(call=call, method="GET")
+
+	def create_list(self, list_name=None):
+
+		call = "/api/lists"
+
+		payload ={}
+
+		if list_name is not None:
+			payload["name"]= str(list_name)
+
+		return self.api_call(call="call", method="POST", json=payload)
+
+	def delete_static_list(self, list_id=None):
+
+		call = "/api/lists/"+str(list_id)
+
+		return self.api_call(call=call, method="DELETE")
+
+	def number_of_users_in_list(self, list_id=None):
+
+		call = "/api/lists/"+str(list_id)+"/size"
+
+		return self.api_call(call=call, method="GET")
+
+	def get_users_in_list(self, list_id=None):
+
+		call = "/api/lists/getUsers"
+
+		payload ={}
+
+		if list_id is not None:
+			payload["listId"]= list_id
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def add_subscribers_to_list(self, list_id=None, subscribers=None):
+
+		call = "/api/lists/subscribe"
+
+		payload = {}
+
+		if list_id is not None:
+			payload["listId"]= list_id
+
+		if subscribers is not None:
+			payload["subscribers"]= subscribers
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def remove_subscribers_to_list(self, list_id=None, subscribers=None,
+									campaign_id=None, channel_unsubscribe=False):
+
+		call = "/api/lists/unsubscribe"
+
+		payload = {}
+
+		if list_id is not None:
+			payload["listId"]= list_id
+
+		if subscribers is not None:
+			payload["subscribers"]= subscribers
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if channel_unsubscribe is not None:
+			payload["channelUnsubscribe"]= channel_unsubscribe
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+	
+	Iterable MessageType Requests
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def list_message_types(self):
+
+		call="/api/messageTypes"
+
+		return self.api_call(call=call, method="GET")
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Metadata Requests
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+		
+	
+
 
 		
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -742,192 +982,4 @@ class IterableAPI():
 
 
 
-	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-		
-		Iterable List requests
-
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	def get_lists(self):
-
-		call = "/api/lists"
-
-		return self.api_call(call=call, method="GET")
-
-	def create_list(self, list_name=None):
-
-		call = "/api/lists"
-
-		payload ={}
-
-		if list_name is not None:
-			payload["name"]= str(list_name)
-
-		return self.api_call(call="call", method="POST", json=payload)
-
-	def delete_static_list(self, list_id=None):
-
-		call = "/api/lists/"+str(list_id)
-
-		return self.api_call(call=call, method="DELETE")
-
-	def number_of_users_in_list(self, list_id=None):
-
-		call = "/api/lists/"+str(list_id)+"/size"
-
-		return self.api_call(call=call, method="GET")
-
-	def get_users_in_list(self, list_id=None):
-
-		call = "/api/lists/getUsers"
-
-		payload ={}
-
-		if list_id is not None:
-			payload["listId"]= list_id
-
-		return self.api_call(call=call, method="GET", params=payload)
-
-	def add_subscribers_to_list(self, list_id=None, subscribers=None):
-
-		call = "/api/lists/subscribe"
-
-		payload = {}
-
-		if list_id is not None:
-			payload["listId"]= list_id
-
-		if subscribers is not None:
-			payload["subscribers"]= subscribers
-
-		return self.api_call(call=call, method="POST", json=payload)
-
-	def remove_subscribers_to_list(self, list_id=None, subscribers=None,
-									campaign_id=None, channel_unsubscribe=False):
-
-		call = "/api/lists/unsubscribe"
-
-		payload = {}
-
-		if list_id is not None:
-			payload["listId"]= list_id
-
-		if subscribers is not None:
-			payload["subscribers"]= subscribers
-
-		if campaign_id is not None:
-			payload["campaignId"]= campaign_id
-
-		if channel_unsubscribe is not None:
-			payload["channelUnsubscribe"]= channel_unsubscribe
-
-		return self.api_call(call=call, method="POST", json=payload)
-
-
-
 	
-
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	
-	Export Data Requests
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-	def export_data_csv(self, data_type_name=None, date_range=None, delimiter=None):
-
-		call="/api/export/data.csv"
-
-		payload={}
-
-		if data_type_name is not None:
-			payload["dataTypeName"]= data_type_name
-
-		if date_range is not None:
-			payload["range"]= date_range
-
-		if delimiter is not None:
-			payload["delimiter"]= delimiter
-
-		return self.api_call(call=call, method="GET", params=payload)
-
-	def export_data_json(self, data_type_name=None, date_range=None, delimiter=None):
-
-		call="/api/export/data.json"
-
-		payload={}
-
-		if data_type_name is not None:
-			payload["dataTypeName"]= data_type_name
-
-		if date_range is not None:
-			payload["range"]= date_range
-
-		if delimiter is not None:
-			payload["delimiter"]= delimiter
-
-		return self.api_call(call=call, method="GET", params=payload)
-
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	
-	inApp Requests
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	
-	def get_in_app_messages(self, email=None, user_id=None, count=None,
-							platform=None, sdk_version=None):
-
-		call = "/api/inApp/getMessages"
-
-		payload={}
-
-		if email is not None:
-			payload["email"]=str(email)
-
-		if user_id is not None:
-			payload["userId"]=str(user_id)
-
-		if count is not None:
-			payload["count"]=count
-
-		if platform is not None:
-			payload["platform"]=str(platform)
-
-		if sdk_version is not None:
-			payload["SDKVersion"]= sdk_version
-
-		return self.api_call(call=call, method="GET", params=payload)
-
-	def send_in_app_notification(self, campaign_id=None, recipient_email=None,
-								data_fields=None, send_at=None, message_medium=None,
-								allow_repeat_marketing_sends=None):
-
-		call="/api/inApp/target"
-
-		payload={}
-
-		if campaign_id is not None:
-			payload["campaignId"]=campaign_id
-
-		if recipient_email is not None:
-			payload["recipientEmail"]=recipient_email
-
-		if data_fields is not None:
-			payload["dataFields"]=data_fields
-
-		if send_at is not None:
-			payload["sendAt"]=send_at
-
-		if allow_repeat_marketing_sends is not None:
-			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
-
-		if message_medium is not None:
-			payload["messageMedium"]=message_medium
-
-
-		return self.api_call(call=call, method="POST", json=payload)
-
