@@ -17,9 +17,11 @@ class IterableAPI():
 	"""	
 
 	def __init__(self, api_key):
-		"""This preforms all initialization and stores the unique API key of the
-			Iterable instance. It also stores the base URI, which is consistent
-			for all instances.  
+		"""
+		This preforms all initialization and stores the unique API key of the
+		Iterable instance. It also stores the base URI, which is consistent
+		for all instances.
+
 		"""
 		
 		self.base_uri = "https://api.iterable.com"		
@@ -31,10 +33,11 @@ class IterableAPI():
 		This is our generic api call function.  We will route all our calls
 		through this function.  The benefit of this is that it:
 			1. Allows for easier debugging if a request fails
-			2. Even though the Iterable API only needs the API key for a security
-				standpoint, if it were ever to require access token for each request
-				we could easily manage the granting and expiration management of such
-				a token.  
+			2. Even though the Iterable API only needs the API key for a 
+			security standpoint, if it were ever to require access token for 
+			each request we could easily manage the granting and expiration
+			management of such a token.  
+
 		"""
 
 		# params(optional) Dictionary or bytes to be sent in the query string for the Request.
@@ -50,8 +53,6 @@ class IterableAPI():
 		if json is None:
 			json ={}		
 		
-		# store the Api in the header per Iterable documentation
-		# https://support.iterable.com/hc/en-us/articles/204780579-API-Overview-and-Sample-Payloads#request
 		headers["Content-type"] = "application/json"
 		headers["Api-Key"] = self.api_key
 
@@ -542,7 +543,8 @@ class IterableAPI():
 		return self.api_call(call=call, method="GET", params=payload)
 
 	def send_in_app_notification(self, campaign_id=None, recipient_email=None,
-								 data_fields=None, send_at=None, message_medium=None,
+								 data_fields=None, send_at=None,
+								 message_medium=None,
 								 allow_repeat_marketing_sends=None):
 
 		call="/api/inApp/target"
@@ -695,6 +697,34 @@ class IterableAPI():
 			payload["nextMarket"]=next_marker
 
 		return self.api_call(call=call, method="GET", params=payload)
+
+	def delete_single_metadata_key_value(self, table=None, key=None):
+		
+		if table is not None and key is not None:
+			call="/api/metadata/"+ str(table) + "/" + str(key)
+
+		return self.api_call(call=call, method="DELETE")
+
+	def get_single_metadata_key_value(self, table=None, key=None):
+
+		if table is not None and key is not None:
+			call="/api/metadata/"+ str(table) + "/" + str(key)
+
+		return self.api_call(call=call, method="GET")
+
+	def create_or_replace_metadata(self, table=None, key=None, value=None):
+
+		if table is not None and key is not None:
+			call="/api/metadata/"+ str(table) + "/" + str(key)
+
+		payload={}
+
+		if value is not None:
+			payload["value"]= value
+
+		return self.api_call(call=call, method="PUT", json=payload)
+
+
 
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -863,7 +893,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="GET", params=payload)
 
-	def register_browser_token(self, email=None, browser_token=None, user_id=None):
+	def register_browser_token(self, email=None, browser_token=None,
+							   user_id=None):
 
 		call = "/api/users/registerBrowserToken"
 
@@ -880,7 +911,8 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	def register_device_token(self, email=None, device_token=None, user_id=None):
+	def register_device_token(self, email=None, device_token=None,
+							  user_id=None):
 
 		call = "/api/users/registerDeviceToken"
 
