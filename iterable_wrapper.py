@@ -67,6 +67,391 @@ class IterableAPI():
 
 		else:
 			print(r.status_code)
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Campaign Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
+
+	def list_campaign_info(self):
+
+		call="/api/campaigns"
+
+		return self.api_call(call=call, method="GET")
+
+	def create_campaign(self, name=None, list_ids=None, template_id=None,
+						suppression_list_ids=None, send_at=None, send_mode=None,
+						start_time_zone=None, default_time_zone=None, 
+						data_fields=None):
+
+		call = "/api/capaigns/create"
+
+		payload ={}
+
+		if name is not None:
+			payload["name"]= str(name)
+
+		if list_ids is not None:
+			payload["listIds"]= list_ids
+
+		if template_id is not None:
+			payload["template_id"]= template_id
+
+		if suppression_list_ids is not None:
+			payload["supressionListIds"]= suppression_list_ids
+
+		if send_at is not None:
+			payload["sendAt"]= str(send_at)
+
+		if send_mode is not None:
+			payload["sendMode"]= str(send_mode)
+
+		if start_time_zone is not None:
+			payload["startTimeZone"]= str(start_time_zone)
+
+		if default_time_zone is not None:
+			payload["defaultTimeZone"]= str(default_time_zone)
+
+		if data_fields is not None:
+			payload["dataField"]= data_fields
+
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def get_campaign_metrics(self, campaign_id=None, start_date_time=None,
+								end_date_time=None, use_new_format=None):
+
+		call= "/api/campaigns/metrics"
+
+		payload ={}
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if start_date_time is not None:
+			payload["startDateTime"]= str(start_date_time)
+
+		if end_date_time is not None:
+			payload["endDateTime"]= str(end_date_time)
+
+		if use_new_format is not None:
+			payload["useNewFormat"]= use_new_format
+
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def get_child_campaigns(self, campaign_id=None):
+
+		if campaign_id is not None:
+			call = "/api/campaigns/recurring/"+str(campaign_id)+"/childCampaigns"
+
+
+		return self.api_call(call=call, method="GET")
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Channel Requests
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def list_channels(self):
+
+		call="/api/channels"
+
+		return self.api_call(call=call, method="GET")
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Commerce Reqeusts
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def track_purchase(self, user=None, items=None, campaign_id=None, 
+						template_id=None, total=None, created_at=None,
+						data_fields=None):
+
+		call="/api/commerce/trackPurchase"
+
+		payload ={}
+
+		if user is not None:
+			payload["user"]= user
+
+		if items is not None:
+			payload["items"]= items
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+		if total is not None:
+			payload["total"]= total
+
+		if created_at is not None:
+			payload["createdAt"]= created_at
+
+		if data_fields is not None:
+			payload["data_fields"]= data_fields
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def update_cart(self, user=None, items=None):
+
+		call="/api/commerce/updateCart"
+
+		payload ={}
+
+		if user is not None:
+			payload["user"]= user
+
+		if items is not None:
+			payload["items"]= items
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	Iterable Email Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def send_email(self, campaign_id=None, recipient_email=None,
+					data_fields=None, send_at=None,
+					allow_repeat_marketing_sends=None, metadata=None,
+					message_medium=None, icon_class=None, name=None
+					):
+
+		call="/api/email/target"
+
+		payload ={}
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if recipient_email is not None:
+			payload["recipientEmail"]= str(recipient_email)
+
+		if data_fields is not None:
+			payload["dataFields"]= data_fields
+
+		if send_at is not None:
+			payload["sendAt"]= send_at
+
+		if allow_repeat_marketing_sends is not None:
+			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
+
+		if metadata is not None:
+			payload["metadata"]= metadata
+
+		if message_medium is not None:
+			payload["messageMedium"]= message_medium
+
+		if icon_class is not None:
+			payload["iconClass"]= icon_class
+
+		if name is not None:
+			payload["name"]= name
+
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def view_email_in_browser(self, email=None, message_id=None):
+
+		call = "/api/email/viewInBrowser"
+
+		payload ={}
+
+		if email is not None:
+			payload["email"]= email
+
+		if message_id is not None:
+			payload["messageId"]= message_id
+
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+
+	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+		Iterable Event Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def get_events(self, email=None, limit=None):
+
+		call="/api/events/"+str(email)
+
+		payload={}
+
+		if (limit is not None
+		 		and limit < 200):
+			payload["limit"]= limit
+
+		return self.api_call(call=call, method="GET", parms=payload)
+
+
+	def consume_in_app_notification(self, email=None, user_id=None
+								, message_id=None, button_index=None):
+
+		call = "/api/events/inAppConsume"
+
+		payload ={}
+
+		if email is not None:
+			payload["email"]=email
+
+		if user_id is not None:
+			payload["userId"]=user_id
+
+		if message_id is not None:
+			payload["messageId"]= message_id
+
+		if button_index is not None:
+			payload["buttonIndex"]= button_index
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def track_event(self, email=None, event_name=None, created_at=None,
+					data_fields=None, user_id=None, campaign_id=None,
+						template_id=None):
+
+		call="/api/events/track"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]=email
+
+		if event_name is not None:
+			payload["eventName"]=event_name
+
+		if created_at is not None:
+			payload["createdAt"]=created_at
+
+		if data_fields is not None:
+			payload["dataFields"]= data_fields
+
+		if user_id is not None:
+			payload["userId"]=user_id
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def track_in_app_click(self, email=None, user_id=None, message_id=None,
+							button_index=None):
+
+		call="/api/events/trackInAppClick"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]= email
+
+		if user_id is not None:
+			payload["userId"]=user_id
+
+		if message_id is not None:
+			payload["messageId"]=message_id
+
+		if button_index is not None:
+			payload["buttonIndex"]=button_index
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def track_in_app_open(self, email=None, user_id=None, message_id=None,
+							button_index=None):
+
+		call="/api/events/trackInAppOpen"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]= email
+
+		if user_id is not None:
+			payload["userId"]=user_id
+
+		if message_id is not None:
+			payload["messageId"]=message_id
+
+		if button_index is not None:
+			payload["buttonIndex"]=button_index
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def track_push_open(self, email=None, user_id=None, campaign_id=None,
+						template_id=None, message_id=None, created_at=None,
+							data_fields=None):
+
+		call="/api/events/trackPushOpen"
+
+		payload={}
+
+		if email is not None:
+			payload["email"]=email
+
+		if user_id is not None:
+			payload["userId"]=user_id
+
+		if campaign_id is not None:
+			payload["CampaignId"]= campaign_id
+
+		if template_id is not None:
+			payload["templateId"]=template_id
+
+		if message_id is not None:
+			payload["messageId"]=message_id
+
+		if created_at is not None:
+			payload["createdAt"]= created_at
+
+		if data_fields is not None:
+			payload["dataFields"]=data_fields
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def track_web_push_click(self, email=None, user_id=None, message_id=None,
+								campaign_id=None, template_id=None):
+
+		call ="/api/events/trackWebPushClick" 
+
+		payload={}
+
+		if email is not None:
+			payload["email"]=email
+
+		if user_id is not None:
+			payload["userId"]=user_id
+
+		if message_id is not None:
+			payload["messageId"]=message_id
+
+		if campaign_id is not None:
+			payload["campaignId"]=campaign_id
+
+		if template_id is not None:
+			payload["templateId"]=template_id
+			
+
+		return self.api_call(call=call, method="POST", json=payload)
+
 		
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -439,214 +824,9 @@ class IterableAPI():
 
 		return self.api_call(call=call, method="POST", json=payload)
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-	Iterable Campaign Requests
 
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""	
-
-	def list_campaign_info(self):
-
-		call="/api/campaigns"
-
-		return self.api_call(call=call, method="GET")
-
-	def create_campaign(self, name=None, list_ids=None, template_id=None,
-						suppression_list_ids=None, send_at=None, send_mode=None,
-						start_time_zone=None, default_time_zone=None, 
-						data_fields=None):
-
-		call = "/api/capaigns/create"
-
-		payload ={}
-
-		if name is not None:
-			payload["name"]= str(name)
-
-		if list_ids is not None:
-			payload["listIds"]= list_ids
-
-		if template_id is not None:
-			payload["template_id"]= template_id
-
-		if suppression_list_ids is not None:
-			payload["supressionListIds"]= suppression_list_ids
-
-		if send_at is not None:
-			payload["sendAt"]= str(send_at)
-
-		if send_mode is not None:
-			payload["sendMode"]= str(send_mode)
-
-		if start_time_zone is not None:
-			payload["startTimeZone"]= str(start_time_zone)
-
-		if default_time_zone is not None:
-			payload["defaultTimeZone"]= str(default_time_zone)
-
-		if data_fields is not None:
-			payload["dataField"]= data_fields
-
-
-		return self.api_call(call=call, method="POST", json=payload)
-
-
-	def get_campaign_metrics(self, campaign_id=None, start_date_time=None,
-								end_date_time=None, use_new_format=None):
-
-		call= "/api/campaigns/metrics"
-
-		payload ={}
-
-		if campaign_id is not None:
-			payload["campaignId"]= campaign_id
-
-		if start_date_time is not None:
-			payload["startDateTime"]= str(start_date_time)
-
-		if end_date_time is not None:
-			payload["endDateTime"]= str(end_date_time)
-
-		if use_new_format is not None:
-			payload["useNewFormat"]= use_new_format
-
-
-		return self.api_call(call=call, method="GET", params=payload)
-
-	def get_child_campaigns(self, campaign_id=None):
-
-		if campaign_id is not None:
-			call = "/api/campaigns/recurring/"+str(campaign_id)+"/childCampaigns"
-
-
-		return self.api_call(call=call, method="GET")
-
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	Iterable Channel Requests
-
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	def list_channels(self):
-
-		call="/api/channels"
-
-		return self.api_call(call=call, method="GET")
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	Iterable Commerce Reqeusts
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	def track_purchase(self, user=None, items=None, campaign_id=None, 
-						template_id=None, total=None, created_at=None,
-						data_fields=None):
-
-		call="/api/commerce/trackPurchase"
-
-		payload ={}
-
-		if user is not None:
-			payload["user"]= user
-
-		if items is not None:
-			payload["items"]= items
-
-		if campaign_id is not None:
-			payload["campaignId"]= campaign_id
-
-		if template_id is not None:
-			payload["templateId"]= template_id
-
-		if total is not None:
-			payload["total"]= total
-
-		if created_at is not None:
-			payload["createdAt"]= created_at
-
-		if data_fields is not None:
-			payload["data_fields"]= data_fields
-
-		return self.api_call(call=call, method="POST", json=payload)
-
-	def update_cart(self, user=None, items=None):
-
-		call="/api/commerce/updateCart"
-
-		payload ={}
-
-		if user is not None:
-			payload["user"]= user
-
-		if items is not None:
-			payload["items"]= items
-
-		return self.api_call(call=call, method="POST", json=payload)
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	Iterable Email Requests
-
-	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-	def send_email(self, campaign_id=None, recipient_email=None,
-					data_fields=None, send_at=None,
-					allow_repeat_marketing_sends=None, metadata=None,
-					message_medium=None, icon_class=None, name=None
-					):
-
-		call="/api/email/target"
-
-		payload ={}
-
-		if campaign_id is not None:
-			payload["campaignId"]= campaign_id
-
-		if recipient_email is not None:
-			payload["recipientEmail"]= str(recipient_email)
-
-		if data_fields is not None:
-			payload["dataFields"]= data_fields
-
-		if send_at is not None:
-			payload["sendAt"]= send_at
-
-		if allow_repeat_marketing_sends is not None:
-			payload["allowRepeatMarketingSends"]= allow_repeat_marketing_sends
-
-		if metadata is not None:
-			payload["metadata"]= metadata
-
-		if message_medium is not None:
-			payload["messageMedium"]= message_medium
-
-		if icon_class is not None:
-			payload["iconClass"]= icon_class
-
-		if name is not None:
-			payload["name"]= name
-
-
-		return self.api_call(call=call, method="POST", json=payload)
-
-
-	def view_email_in_browser(self, email=None, message_id=None):
-
-		call = "/api/email/viewInBrowser"
-
-		payload ={}
-
-		if email is not None:
-			payload["email"]= email
-
-		if message_id is not None:
-			payload["messageId"]= message_id
-
-
-		return self.api_call(call=call, method="GET", params=payload)
+	
 
 
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
