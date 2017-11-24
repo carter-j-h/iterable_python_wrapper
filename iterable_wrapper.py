@@ -798,6 +798,424 @@ class IterableAPI():
 
 	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+	Iterable Template Requests
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+	def get_templates_for_project(self, template_type=None, 
+								  message_medium=None,
+								  start_date_time=None,
+								  end_date_time=None):
+
+		call="/api/templates"
+
+		payload={}
+
+		if template_type is ("Base" or "Blast" or "Triggered" or "Workflow"):
+			payload["templateType"]=template_type	
+
+		else:
+			raise ValueError('You did not specify the correct template type')
+
+		if message_medium is ("Email" or "Push" or "InApp" or "SMS"):
+			payload["messageMedium"]=message_medium
+
+		else:
+			raise ValueError('You did not specify the correct message medium')
+
+		if start_date_time is not None:
+			payload["startDateTime"]=start_date_time
+
+		if end_date_time is not None:
+			payload["endDateTime"]= end_date_time
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def get_email_template(self, template_id=None, locale=None):
+
+		call="/api/templates/email/get"
+
+		payload={}
+
+		if template_id is not None:
+			payload["templateId"]=template_id
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def update_email_template(self, template_id=None, metadata=None,
+							  name=None, from_name=None, from_email=None,
+							  reply_to_email=None, subject=None,
+							  preheader_text=None, cc_emails=None,
+							  bcc_emails=None, html=None,
+							  plain_text=None,
+							  google_analytics_campaign_name=None,
+							  link_parameters=None, data_feed_id=None,
+							  cache_data_feed=None,
+							  merge_data_feed_context=None,
+							  client_template_id=None, locale=None,
+							  message_type_id=None, creator_user_id=None):
+
+
+		call="/api/templates/email/update"
+
+		payload={}
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+		if metadata is not None:
+			payload["metadata"]= metadata
+
+		if name is not None:
+			payload["name"]= name
+
+		if from_name is not None:
+			payload["fromName"]= from_name
+
+		if from_email is not None:
+			payload["fromEmail"]= from_email
+
+		if reply_to_email is not None:
+			payload["replyToEmail"]= reply_to_email
+
+		if subject is not None:
+			payload["subject"]= subject
+
+		if preheader_text is not None:
+			payload["preheaderText"]= preheader_text
+
+		if cc_emails is not None:
+			payload["ccEmails"]= cc_emails
+
+		if bcc_emails is not None:
+			payload["bccEmails"]= bcc_emails
+
+		if html is not None:
+			payload["html"]= html
+
+		if plain_text is not None:
+			payload["planText"]= plain_text
+
+		if google_analytics_campaign_name is not None:
+			payload["googleAnalyticsCampaignName"]= google_analytics_campaign_name
+
+		if link_parameters is not None:
+			payload["linkParameters"]= link_parameters
+
+		if data_feed_id is not None:
+			payload["dataFeedId"]= data_feed_id
+
+		if cache_data_feed is not None:
+			payload["cacheDataFeed"]= cache_data_feed
+
+		if merge_data_feed_context is not None:
+			payload["mergeDataFeedContext"]= merge_data_feed_context
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		if message_type_id is not None:
+			payload["messageTypeId"]= message_type_id
+
+		if creator_user_id is not None:
+			payload["creatorUserId"]= creator_user_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def upsert_email_template(self, client_template_id=None,
+							  name=None, from_name=None, from_email=None,
+							  reply_to_email=None, subject=None,
+							  preheader_text=None, cc_emails=None,
+							  bcc_emails=None, html=None,
+							  plain_text=None,
+							  google_analytics_campaign_name=None,
+							  link_parameters=None, data_feed_id=None,
+							  cache_data_feed=None,
+							  merge_data_feed_context=None,
+							  locale=None,
+							  message_type_id=None, creator_user_id=None):
+
+		call="/api/templates/email/upsert"
+
+		payload={}
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		if name is not None:
+			payload["name"]= name
+
+		if from_name is not None:
+			payload["fromName"]= from_name
+
+		if from_email is not None:
+			payload["fromEmail"]= from_email
+
+		if reply_to_email is not None:
+			payload["replyToEmail"]= reply_to_email
+
+		if subject is not None:
+			payload["subject"]= subject
+
+		if preheader_text is not None:
+			payload["preheaderText"]= preheader_text
+
+		if cc_emails is not None:
+			payload["ccEmails"]= cc_emails
+
+		if bcc_emails is not None:
+			payload["bccEmails"]= bcc_emails
+
+		if html is not None:
+			payload["html"]= html
+
+		if plain_text is not None:
+			payload["planText"]= plain_text
+
+		if google_analytics_campaign_name is not None:
+			payload["googleAnalyticsCampaignName"]= google_analytics_campaign_name
+
+		if link_parameters is not None:
+			payload["linkParameters"]= link_parameters
+
+		if data_feed_id is not None:
+			payload["dataFeedId"]= data_feed_id
+
+		if cache_data_feed is not None:
+			payload["cacheDataFeed"]= cache_data_feed
+
+		if merge_data_feed_context is not None:
+			payload["mergeDataFeedContext"]= merge_data_feed_context
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		if message_type_id is not None:
+			payload["messageTypeId"]= message_type_id
+
+		if creator_user_id is not None:
+			payload["creatorUserId"]= creator_user_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def get_email_template(self, client_template_id=None):
+
+		call="/api/templates/getClientTemplateId"
+
+		payload={}
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def get_push_template(self, template_id=None, locale=None):
+
+		call="/api/templates/push/get"
+
+		payload={}
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def update_push_template(self, template_id=None, created_at=None,
+							 updated_at=None, name=None, message=None,
+							 payload_content=None, badge=None, locale=None,
+							 message_type_id=None, sound=None,
+							 deeplink=None, client_template_id=None,
+							 campaign_id=None):
+
+		call="/api/templates/push/update"
+
+		payload = {}
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+		if created_at is not None:
+			payload["createdAt"]= created_at
+
+		if updated_at is not None:
+			payload["updatedAt"]= updated_at
+
+		if name is not None:
+			payload["name"]= name
+
+		if message is not None:
+			payload["message"]= message
+
+		if payload_content is not None:
+			payload["payload"]= payload_content
+
+		if badge is not None:
+			payload["badge"]= badge
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		if message_type_id is not None:
+			payload["messageTypeId"]= message_type_id
+
+		if sound is not None:
+			payload["sound"]= sound
+
+		if deeplink is not None:
+			payload["deeplink"]= deeplink
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def upsert_push_template(self, client_template_id=None, name=None,
+							 message=None, payload_content=None, 
+							 badge=None, locale=None,
+							 message_type_id=None, sound=None,
+							 deeplink=None, campaign_id=None):
+
+		call="/api/templates/push/upsert"
+
+		payload = {}
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		if name is not None:
+			payload["name"]= name
+
+		if message is not None:
+			payload["message"]= message
+
+		if payload_content is not None:
+			payload["payload"]= payload_content
+
+		if badge is not None:
+			payload["badge"]= badge
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		if message_type_id is not None:
+			payload["messageTypeId"]= message_type_id
+
+		if sound is not None:
+			payload["sound"]= sound
+
+		if deeplink is not None:
+			payload["deeplink"]= deeplink
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+	def get_sms_template(self, template_id=None, locale=None):
+
+		call="/api/templates/sms/get"
+
+		payload={}
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		return self.api_call(call=call, method="GET", params=payload)
+
+	def update_sms_template(self, template_id=None, created_at=None,
+							updated_at=None, name=None, message=None,
+							locale=None, message_type_id=None,
+							image_url=None, client_template_id=None,
+							campaign_id=None):
+
+		call="/api/templates/sms/update"
+
+		payload= {}
+
+		if template_id is not None:
+			payload["templateId"]= template_id
+
+		if created_at is not None:
+			payload["createdAt"]= created_at
+
+		if updated_at is not None:
+			payload["updatedAt"]= updated_at
+
+		if name is not None:
+			payload["name"]= name
+
+		if message is not None:
+			payload["message"]= message
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		if message_type_id is not None:
+			payload["messageTypeId"]= message_type_id
+
+		if image_url is not None:
+			payload["imageUrl"]= image_url
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+
+	def upsert_sms_template(self, client_template_id=None,
+							name=None, message=None, locale=None,
+							message_type_id=None, image_url=None,
+							campaign_id=None):
+
+		call="/api/templates/sms/upsert"
+
+		payload= {}
+
+		if client_template_id is not None:
+			payload["clientTemplateId"]= client_template_id
+
+		if name is not None:
+			payload["name"]= name
+
+		if message is not None:
+			payload["message"]= message
+
+		if locale is not None:
+			payload["locale"]= locale
+
+		if message_type_id is not None:
+			payload["messageTypeId"]= message_type_id
+
+		if image_url is not None:
+			payload["imageUrl"]= image_url
+
+		if campaign_id is not None:
+			payload["campaignId"]= campaign_id
+
+		return self.api_call(call=call, method="POST", json=payload)
+
+			
+
+	"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 	Iterable User Requests
 
 
