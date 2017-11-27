@@ -5,9 +5,12 @@ from iterable_wrapper import IterableAPI
 class WrapperTestCase(unittest.TestCase):
     """Tests for `iterable_wrapper.py`."""
 
-    def test_is_five_prime(self):
-        """Is five successfully determined to be prime?"""
-        self.assertTrue(is_prime(5))
+    
+
+
+    def test_users_requests(self):
+        """Is api reqeust behaving correctly?"""
+        self.assertTrue(IterableAPI.api_call(call="/api/users/getByEmail", method="GET", params={"email": "carter@iterable.com"}))
 
 if __name__ == '__main__':
     unittest.main()

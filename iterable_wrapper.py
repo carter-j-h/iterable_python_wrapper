@@ -1328,7 +1328,7 @@ class IterableAPI():
 		payload = {}
 
 		if email is not None:
-			payload["email"]
+			payload["email"]= email
 
 		return self.api_call(call=call, method="GET", params=payload)
 
